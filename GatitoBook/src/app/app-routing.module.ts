@@ -9,6 +9,12 @@ const routes: Routes = [
     loadChildren: () => import("./home/home.module").then((m) => m.HomeModule),
     // Esta forma acima é o redirecionamento com lazy loading
   },
+  {
+    path: "animais",
+    loadChildren: () =>
+      import("./animais/animais.module").then((m) => m.AnimaisModule),
+    // Esta forma acima é o redirecionamento com lazy loading
+  },
 ];
 
 @NgModule({
