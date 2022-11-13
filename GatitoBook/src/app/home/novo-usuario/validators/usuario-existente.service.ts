@@ -4,23 +4,22 @@ import { first, map, switchMap } from "rxjs";
 import { NovoUsuarioService } from "../novo-usuario.service";
 
 @Injectable({
-  providedIn: "root",
+    providedIn: "root",
 })
 export class UsuarioExistenteService {
-  constructor(private _novoUsuarioService: NovoUsuarioService) {}
+    constructor(private _novoUsuarioService: NovoUsuarioService) {}
 
-  verifyExistingUser() {
-    return (control: AbstractControl) => {
-      console.log(control.value);
-      return control.valueChanges.pipe(
-        switchMap((nomeUsuario) =>
-          this._novoUsuarioService.verifyExistingUser(nomeUsuario)
-        ),
-        map((usuarioExiste) =>
-          usuarioExiste ? { usuarioExistente: true } : null
-        ),
-        first()
-      );
-    };
-  }
+    verifyExistingUser() {
+        return (control: AbstractControl) => {
+            return control.valueChanges.pipe(
+                switchMap((nomeUsuario) =>
+                    this._novoUsuarioService.verifyExistingUser(nomeUsuario)
+                ),
+                map((usuarioExiste) =>
+                    usuarioExiste ? { usuarioExistente: true } : null
+                ),
+                first()
+            );
+        };
+    }
 }
