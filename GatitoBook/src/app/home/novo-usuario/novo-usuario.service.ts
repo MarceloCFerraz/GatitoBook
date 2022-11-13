@@ -1,21 +1,22 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
 import { NovoUsuario } from "./novo-usuario";
 
+const API: string = environment.backendAPIUrl;
+
 @Injectable({
-  providedIn: "root",
+    providedIn: "root",
 })
 export class NovoUsuarioService {
-  apiUrl: string = "http://localhost:3000/user/";
+    constructor(private _httpClient: HttpClient) {}
 
-  constructor(private _httpClient: HttpClient) {}
+    cadastrar(novoUsuario: NovoUsuario) {
+        return this._httpClient.post(`${API}/user/signup`, novoUsuario);
+    }
 
-  cadastrar(novoUsuario: NovoUsuario) {
-    return this._httpClient.post(this.apiUrl + "signup", novoUsuario);
-  }
-
-  verifyExistingUser(nomeUsuario: string) {
-    return this._httpClient.get(this.apiUrl + `exists/${nomeUsuario}`);
-  }
+    verifyExistingUser(nomeUsuario: string) {
+        return this._httpClient.get(`${API}/user/exists/${nomeUsuario}`);
+    }
 }

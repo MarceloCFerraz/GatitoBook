@@ -3,6 +3,9 @@ import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Observable, tap } from "rxjs";
 import { Router } from "@angular/router";
 import { UsuarioService } from "./usuario/usuario.service";
+import { environment } from "src/environments/environment";
+
+const API = environment.backendAPIUrl;
 
 @Injectable({
     providedIn: "root",
@@ -20,7 +23,7 @@ export class AutenticacaoService {
         };
 
         return this._httpCliente
-            .post("http://localhost:3000/user/login", user, {
+            .post(`${API}/user/login`, user, {
                 observe: "response",
             })
             .pipe(

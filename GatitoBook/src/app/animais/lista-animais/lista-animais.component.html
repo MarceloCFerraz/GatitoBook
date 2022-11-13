@@ -1,1 +1,11 @@
-<p>lista-animais works!</p>
+<!-- 
+    Ao invés de utilizar um objeto, é melhor utilizar o Observable
+    com o pipe async, pois dessa forma a responsabilidade de fazer
+    o subscribe e unsubscribe é transferida para o angular.
+
+    Este é o motivo pelo qual a variável "animais$" é do tipo Observable
+    ao invés de Animais
+ -->
+<div *ngIf="animais$ | async as animais">
+    <app-grade-fotos-animais [animais]="animais"> </app-grade-fotos-animais>
+</div>

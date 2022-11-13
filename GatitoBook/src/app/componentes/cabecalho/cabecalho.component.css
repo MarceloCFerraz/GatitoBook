@@ -1,1 +1,16 @@
+#login-navbar {
+    margin-right: 1em;
+}
 
+#username-navbar {
+    margin-left: 0.2em;
+    margin-right: 1em;
+}
+
+#logout-navbar {
+    margin-right: 20px;
+}
+
+#brand-navbar {
+    margin-left: 1em;
+}
