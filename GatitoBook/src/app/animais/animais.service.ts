@@ -1,11 +1,12 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { catchError, map, mapTo, Observable, of, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
 import { TokenService } from "../autenticacao/token.service";
 import { Animais, Animal } from "./animais";
 
 const API: string = environment.backendAPIUrl;
+const NOT_MODIFIED = "304";
 
 @Injectable({
     providedIn: "root",
@@ -28,5 +29,38 @@ export class AnimaisService {
         const url = `${API}/photos/${id}`;
 
         return this._http.get<Animal>(url);
+    }
+
+    excluiAnimal(id: number): Observable<Animal> {
+        return this._http.delete<Animal>(`${API}/photos/${id}`);
+    }
+
+    curtir(id: number): Observable<boolean> {
+        const url = `${API}/photos/${id}/likes`;
+
+        return this._http
+            .post(
+                url,
+                {
+                    /* body */
+                },
+                {
+                    /* options. necessário para obter mais informações da requisição com o response */
+                    observe: "response",
+                }
+            )
+            .pipe(
+                /**
+                 * pipe é para manipular o fluxo da requisição com operators
+                 */
+                map(() => {
+                    return true;
+                }),
+                catchError((error) => {
+                    return error.status === NOT_MODIFIED
+                        ? of(false)
+                        : throwError(() => new Error(error));
+                })
+            );
     }
 }
