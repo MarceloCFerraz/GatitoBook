@@ -36,7 +36,7 @@ export class AnimaisService {
     }
 
     curtir(id: number): Observable<boolean> {
-        const url = `${API}/photos/${id}/likes`;
+        const url = `${API}/photos/${id}/like`;
 
         return this._http
             .post(
