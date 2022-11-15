@@ -1,11 +1,15 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { DetalheAnimalComponent } from "./detalhe-animal/detalhe-animal.component";
 import { ListaAnimaisComponent } from "./lista-animais/lista-animais.component";
 
-const routes: Routes = [{ path: "", component: ListaAnimaisComponent }];
+const routes: Routes = [
+    { path: "", component: ListaAnimaisComponent },
+    { path: ":animalID", component: DetalheAnimalComponent },
+];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
 })
 export class AnimaisRoutingModule {}
