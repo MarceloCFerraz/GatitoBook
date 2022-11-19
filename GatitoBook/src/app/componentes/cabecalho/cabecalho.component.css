@@ -1,5 +1,6 @@
 #login-navbar {
     margin-right: 1em;
+    cursor: pointer;
 }
 
 #username-navbar {
@@ -9,6 +10,7 @@
 
 #logout-navbar {
     margin-right: 20px;
+    cursor: pointer;
 }
 
 #brand-navbar {

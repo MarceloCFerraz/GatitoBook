@@ -1,6 +1,22 @@
 <header class="sticky-top">
     <nav class="navbar navbar-light bg-white">
-        <a id="brand-navbar" class="navbar-brand">GatitoBook</a>
+        <a [routerLink]="['/animais/']" id="brand-navbar" class="navbar-brand">
+            <i
+                class="fa fa-bars mr-2"
+                (click)="menu.abreMenu()"
+                (keyup.space)="menu.abreMenu()"
+            >
+            </i>
+            GatitoBook
+        </a>
+
+        <app-menu #menu>
+            <ul class="list-unstyled">
+                <li>
+                    <a [routerLink]="['animais', 'novo']">Novo Animal</a>
+                </li>
+            </ul>
+        </app-menu>
 
         <div *ngIf="user$ | async as user">
             <div *ngIf="usuarioLogado(); else usuarioNaoLogado">
@@ -11,9 +27,9 @@
         </div>
 
         <ng-template #usuarioNaoLogado>
-            <span id="login-navbar" class="navbar-text">
-                <a [routerLink]="['']">Login</a>
-            </span>
+            <a id="login-navbar" class="navbar-text" [routerLink]="['']">
+                <span> Login </span>
+            </a>
         </ng-template>
     </nav>
 </header>
